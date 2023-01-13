@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tangerinetree",
+  "name": "Legacy Tangerine Tree",
+  "description": "Añade un arbol de mandarinas al juego.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["mikanon"],
+  "credits": "Forge Mod Loader, el que adaptó el viejo MCP de la 1.7.10 para poder usarlo en pleno 2023 y yo.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
