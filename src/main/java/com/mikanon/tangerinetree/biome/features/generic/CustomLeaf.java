@@ -4,6 +4,7 @@ import com.mikanon.tangerinetree.TangerineTree;
 import com.mikanon.tangerinetree.items.TangerineFruit;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,18 +12,21 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Facing;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Random;
 
 public class CustomLeaf extends BlockLeaves {
 
     //texturas para tipo de renderer
     public static final String[][] leafTypes = new String[][] {
-            {"leaves_tangerine"},
-            {"leaves_tangerine_opaque"}
+            {"leaves_tangerine", "leaves_tangerine_fruit"},
+            {"leaves_tangerine_opaque", "leaves_tangerine_fruit_opaque"}
     };
     public static String[] leaves = new String[]{"tangerine"};
 
@@ -33,6 +37,11 @@ public class CustomLeaf extends BlockLeaves {
         } else if ((side & 3) == 1 && world.rand.nextInt(meta) == 0){
             this.dropBlockAsItem(world, x, y, z, new ItemStack(TangerineTree.tangerineSapling, 1, 0));
         }
+    }
+
+    @Override
+    public Block setBlockName(String p_149663_1_) {
+        return super.setBlockName(p_149663_1_);
     }
 
     @Override
@@ -68,7 +77,19 @@ public class CustomLeaf extends BlockLeaves {
     @Override
     public IIcon getIcon(int side, int meta) {
         this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
-        return (meta & 3) == 1 ? this.field_150129_M[this.field_150127_b][1] : this.field_150129_M[this.field_150127_b][0];
+
+        if (side == 1){
+            return this.field_150129_M[this.field_150127_b][0];
+        }
+
+        switch (meta){
+            case 0:
+                return this.field_150129_M[this.field_150127_b][1];
+            case 1:
+                return this.field_150129_M[this.field_150127_b][0];
+            default:
+                return this.field_150129_M[this.field_150127_b][0];
+        }
     }
 
     @Override

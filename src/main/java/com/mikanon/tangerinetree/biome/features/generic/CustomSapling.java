@@ -67,7 +67,7 @@ public class CustomSapling extends BlockSapling {
         Object object = random.nextInt(10) == 0 ? new WorldGenBigTree(true) : new WorldGenTrees(true);
         switch (metadata) {
             case 0:
-                object = new WorldGenCustomTree(TangerineTree.tangerineLog, TangerineTree.tangerineLeaf, 0, 0, false, 5, 7, false);
+                object = new WorldGenCustomTree(TangerineTree.tangerineLog, TangerineTree.tangerineLeaf, 0, 0, false, 4, 5, false);
                 break;
             default:
                 break;
@@ -108,6 +108,11 @@ public class CustomSapling extends BlockSapling {
         for (int i=0; i<saplings.length; i++){
             list.add(new ItemStack(item, 1, i));
         }
+    }
+
+    @Override
+    public Block setBlockName(String p_149663_1_) {
+        return super.setBlockName(p_149663_1_);
     }
 
     @SideOnly(Side.CLIENT)

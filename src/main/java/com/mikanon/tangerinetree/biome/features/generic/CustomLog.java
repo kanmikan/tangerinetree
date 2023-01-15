@@ -3,6 +3,7 @@ package com.mikanon.tangerinetree.biome.features.generic;
 import com.mikanon.tangerinetree.TangerineTree;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -35,4 +36,8 @@ public class CustomLog extends BlockLog {
         }
     }
 
+    @Override
+    public Block setBlockName(String p_149663_1_) {
+        return super.setBlockName(p_149663_1_);
+    }
 }

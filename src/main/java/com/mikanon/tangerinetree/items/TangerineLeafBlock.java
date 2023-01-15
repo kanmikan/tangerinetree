@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+import java.util.Random;
+
 public class TangerineLeafBlock extends ItemBlock {
 
     public static final String[] leaves = new String[]{"tangerine"};
@@ -26,7 +28,7 @@ public class TangerineLeafBlock extends ItemBlock {
     }
 
     public int getMetadata(int meta){
-        return meta;
+        return 0;
     }
 
 }
