@@ -3,6 +3,7 @@ package com.mikanon.tangerinetree;
 import com.mikanon.tangerinetree.biome.features.generic.CustomLeaf;
 import com.mikanon.tangerinetree.biome.features.generic.CustomLog;
 import com.mikanon.tangerinetree.biome.features.generic.CustomSapling;
+import com.mikanon.tangerinetree.blocks.TangerinePlankBlock;
 import com.mikanon.tangerinetree.items.TangerineFruit;
 import com.mikanon.tangerinetree.items.TangerineLeafBlock;
 import com.mikanon.tangerinetree.items.TangerineLogBlock;
@@ -16,6 +17,8 @@ import net.minecraft.block.Block;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 
 
@@ -29,6 +32,7 @@ public class TangerineTree {
     public static Block tangerineLog;
     public static Block tangerineLeaf;
     public static Block tangerineSapling;
+    public static Block tangerinePlank;
 
     public static Item tangerineFruit;
 
@@ -41,12 +45,14 @@ public class TangerineTree {
         tangerineLeaf = new CustomLeaf().setBlockName("leaf").setCreativeTab(tab);
         tangerineSapling = new CustomSapling().setBlockName("sapling").setCreativeTab(tab);
         tangerineFruit = new TangerineFruit().setUnlocalizedName("tangerine_fruit");
+        tangerinePlank = new TangerinePlankBlock(Material.wood).setBlockName("tangerine_plank");
 
         //Registro
         GameRegistry.registerBlock(tangerineLog, TangerineLogBlock.class, tangerineLog.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(tangerineLeaf, TangerineLeafBlock.class, tangerineLeaf.getUnlocalizedName().substring(5));
         GameRegistry.registerBlock(tangerineSapling, TangerineSaplingBlock.class, tangerineSapling.getUnlocalizedName().substring(5));
         GameRegistry.registerItem(tangerineFruit, "tangerine_fruit");
+        GameRegistry.registerBlock(tangerinePlank, "tangerine_plank");
 
     }
 
@@ -57,7 +63,10 @@ public class TangerineTree {
     
     @EventHandler
     public void PostInit(FMLPostInitializationEvent event){
-
+        //registro de flamabilidad
+        Blocks.fire.setFireInfo(tangerinePlank, 5, 20);
+        Blocks.fire.setFireInfo(tangerineLog, 5, 5);
+        Blocks.fire.setFireInfo(tangerineLeaf, 5, 60);
     }
     
 }

@@ -10,6 +10,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
@@ -22,6 +24,11 @@ public class CustomLog extends BlockLog {
         for (int i=0; i<logs.length; i++){
             list.add(new ItemStack(item, 1, i));
         }
+    }
+
+    @Override
+    public boolean isFlammable(IBlockAccess world, int x, int y, int z, ForgeDirection face) {
+        return true;
     }
 
     @SideOnly(Side.CLIENT)

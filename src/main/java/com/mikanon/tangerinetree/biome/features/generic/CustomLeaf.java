@@ -17,6 +17,7 @@ import net.minecraft.util.Facing;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 import java.util.Random;
@@ -90,6 +91,11 @@ public class CustomLeaf extends BlockLeaves {
             default:
                 return this.field_150129_M[this.field_150127_b][0];
         }
+    }
+
+    @Override
+    public boolean isFlammable(IBlockAccess world, int x, int y, int z, ForgeDirection face) {
+        return true;
     }
 
     @Override
