@@ -20,6 +20,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 
 @Mod(modid = TangerineTree.MODID, version = TangerineTree.VERSION)
@@ -58,6 +59,8 @@ public class TangerineTree {
 
     @EventHandler
     public void init(FMLInitializationEvent event){
+
+        GameRegistry.addShapelessRecipe(new ItemStack(tangerinePlank, 4), new ItemStack(tangerineLog, 1));
 
     }
     
