@@ -4,10 +4,9 @@ import com.mikanon.tangerinetree.biome.features.generic.CustomLeaf;
 import com.mikanon.tangerinetree.biome.features.generic.CustomLog;
 import com.mikanon.tangerinetree.biome.features.generic.CustomSapling;
 import com.mikanon.tangerinetree.blocks.TangerinePlankBlock;
-import com.mikanon.tangerinetree.items.TangerineFruit;
-import com.mikanon.tangerinetree.items.TangerineLeafBlock;
-import com.mikanon.tangerinetree.items.TangerineLogBlock;
-import com.mikanon.tangerinetree.items.TangerineSaplingBlock;
+import com.mikanon.tangerinetree.blocks.TangerineSlab;
+import com.mikanon.tangerinetree.blocks.TangerineStairs;
+import com.mikanon.tangerinetree.items.*;
 import com.mikanon.tangerinetree.ui.TangerineTab;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -17,8 +16,10 @@ import net.minecraft.block.Block;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -27,13 +28,15 @@ import net.minecraft.item.ItemStack;
 public class TangerineTree {
 
     public static final String MODID = "tangerinetree";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.2";
 
     public static TangerineTab tab;
     public static Block tangerineLog;
     public static Block tangerineLeaf;
     public static Block tangerineSapling;
     public static Block tangerinePlank;
+    public static BlockSlab tangerineSlab, tangerineDoubleSlab;
+    public static Block tangerineStairs;
 
     public static Item tangerineFruit;
 
@@ -47,6 +50,9 @@ public class TangerineTree {
         tangerineSapling = new CustomSapling().setBlockName("sapling").setCreativeTab(tab);
         tangerineFruit = new TangerineFruit().setUnlocalizedName("tangerine_fruit");
         tangerinePlank = new TangerinePlankBlock(Material.wood).setBlockName("tangerine_plank");
+        tangerineSlab = (BlockSlab) new TangerineSlab(false).setBlockName("tangerine_slab");
+        tangerineDoubleSlab = (BlockSlab) new TangerineSlab(true).setBlockName("tangerine_double_slab");
+        tangerineStairs = new TangerineStairs().setBlockName("tangerine_stairs");
 
         //Registro
         GameRegistry.registerBlock(tangerineLog, TangerineLogBlock.class, tangerineLog.getUnlocalizedName().substring(5));
@@ -54,13 +60,76 @@ public class TangerineTree {
         GameRegistry.registerBlock(tangerineSapling, TangerineSaplingBlock.class, tangerineSapling.getUnlocalizedName().substring(5));
         GameRegistry.registerItem(tangerineFruit, "tangerine_fruit");
         GameRegistry.registerBlock(tangerinePlank, "tangerine_plank");
+        GameRegistry.registerBlock(tangerineSlab, ItemTangerineSlab.class, "tangerine_slab");
+        GameRegistry.registerBlock(tangerineDoubleSlab, ItemTangerineSlab.class, "tangerine_double_slab");
+        GameRegistry.registerBlock(tangerineStairs, "tangerine_stairs");
 
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event){
-
         GameRegistry.addShapelessRecipe(new ItemStack(tangerinePlank, 4), new ItemStack(tangerineLog, 1));
+
+        GameRegistry.addRecipe(new ItemStack(tangerineStairs, 4),
+                "X  ",
+                "XX ",
+                "XXX",
+                'X', new ItemStack(tangerinePlank));
+
+        GameRegistry.addRecipe(new ItemStack(tangerineSlab, 6),
+                "XXX",
+                'X', new ItemStack(tangerinePlank));
+
+        GameRegistry.addRecipe(new ItemStack(Blocks.crafting_table, 1),
+                "XX",
+                "XX",
+                'X', new ItemStack(tangerinePlank));
+
+        GameRegistry.addRecipe(new ItemStack(Items.stick, 4),
+                "X",
+                "X",
+                'X', new ItemStack(tangerinePlank));
+
+        GameRegistry.addRecipe(new ItemStack(Blocks.chest, 1),
+                "XXX",
+                "X X",
+                "XXX",
+                'X', new ItemStack(tangerinePlank));
+
+        GameRegistry.addRecipe(new ItemStack(Items.wooden_sword, 1),
+                "X",
+                "X",
+                "S",
+                'X', new ItemStack(tangerinePlank),
+                'S', new ItemStack(Items.stick));
+
+        GameRegistry.addRecipe(new ItemStack(Items.wooden_pickaxe, 1),
+                "XXX",
+                " S ",
+                " S ",
+                'X', new ItemStack(tangerinePlank),
+                'S', new ItemStack(Items.stick));
+
+        GameRegistry.addRecipe(new ItemStack(Items.wooden_axe, 1),
+                "XX",
+                "XS",
+                " S",
+                'X', new ItemStack(tangerinePlank),
+                'S', new ItemStack(Items.stick));
+
+        GameRegistry.addRecipe(new ItemStack(Items.wooden_shovel, 1),
+                "X",
+                "S",
+                "S",
+                'X', new ItemStack(tangerinePlank),
+                'S', new ItemStack(Items.stick));
+
+        GameRegistry.addRecipe(new ItemStack(Items.wooden_hoe, 1),
+                "XX",
+                " S",
+                " S",
+                'X', new ItemStack(tangerinePlank),
+                'S', new ItemStack(Items.stick));
 
     }
     
@@ -70,6 +139,9 @@ public class TangerineTree {
         Blocks.fire.setFireInfo(tangerinePlank, 5, 20);
         Blocks.fire.setFireInfo(tangerineLog, 5, 5);
         Blocks.fire.setFireInfo(tangerineLeaf, 5, 60);
+        Blocks.fire.setFireInfo(tangerineSlab, 5, 20);
+        Blocks.fire.setFireInfo(tangerineStairs, 5, 20);
+
     }
     
 }

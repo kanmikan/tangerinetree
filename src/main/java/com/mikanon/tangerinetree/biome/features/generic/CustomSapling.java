@@ -63,7 +63,7 @@ public class CustomSapling extends BlockSapling {
         int i1 = 0, j1 = 0;
         boolean flag = false;
 
-        //ignorar las demas variedades por ahora.
+        //ignorar las demas variedades.
         Object object = random.nextInt(10) == 0 ? new WorldGenBigTree(true) : new WorldGenTrees(true);
         switch (metadata) {
             case 0:

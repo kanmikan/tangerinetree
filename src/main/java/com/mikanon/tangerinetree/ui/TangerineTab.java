@@ -13,6 +13,7 @@ public class TangerineTab extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     public Item getTabIconItem() {
-        return Item.getItemFromBlock(TangerineTree.tangerineSapling);
+        //return Item.getItemFromBlock(TangerineTree.tangerineSapling);
+        return TangerineTree.tangerineFruit;
     }
 }

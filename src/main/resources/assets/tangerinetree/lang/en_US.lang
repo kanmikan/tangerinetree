@@ -3,4 +3,6 @@ tile.log.tangerine.name=Tangerine Log
 tile.sapling.tangerine.name=Tangerine Sapling
 item.tangerine_fruit.name=Tangerine
 tile.tangerine_plank.name=Tangerine Plank
+tile.tangerine_slab.name=Tangerine Plank Slab
+tile.tangerine_stairs.name=Tangerine Plank Stairs
 itemGroup.tangerinetree=Tangerine Tree Mod

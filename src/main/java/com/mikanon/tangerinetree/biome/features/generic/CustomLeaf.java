@@ -26,14 +26,24 @@ import java.util.Random;
 public class CustomLeaf extends BlockLeaves {
 
     //texturas para tipo de renderer
-    public static final String[][] leafTypes = new String[][] {
-            {"leaves_tangerine", "leaves_tangerine_fruit"},
-            {"leaves_tangerine_opaque", "leaves_tangerine_fruit_opaque"}
+    private static final String[][] leafTypes = new String[][] {
+            {"leaves_tangerine", "leaves_tangerine_fruit", "leaves_tangerine_flower"},
+            {"leaves_tangerine_opaque", "leaves_tangerine_fruit_opaque", "leaves_tangerine_flower_opaque"}
     };
-    public static String[] leaves = new String[]{"tangerine"};
+    private static final String[] leaves = new String[]{"tangerine"};
+
+    private int RANDOM_SEASON;
+
+    public CustomLeaf(){
+        this.rollLeaves();
+    }
+
+    public void rollLeaves(){
+        //sprite random para el bosque, chance de que al arrancar el juego salgan flores o solo frutas, o sin nada.
+        this.RANDOM_SEASON = (int) (Math.random() * leafTypes[0].length);
+    }
 
     protected void func_150124_c(World world, int x, int y, int z, int side, int meta) {
-
         if (world.rand.nextInt(5) == 2) {
             this.dropBlockAsItem(world, x, y, z, new ItemStack(TangerineTree.tangerineFruit, 1, 0));
         } else if ((side & 3) == 1 && world.rand.nextInt(meta) == 0){
@@ -91,7 +101,7 @@ public class CustomLeaf extends BlockLeaves {
 
         switch (meta){
             case 0:
-                return this.field_150129_M[this.field_150127_b][1];
+                return this.field_150129_M[this.field_150127_b][RANDOM_SEASON];
             case 1:
                 return this.field_150129_M[this.field_150127_b][0];
             default:
