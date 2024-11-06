@@ -15,7 +15,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.List;
 
-public class CustomLog extends BlockLog {
+public class TangerineLog extends BlockLog {
 
     public static final String[] logs = new String[]{"tangerine"};
 
@@ -44,7 +44,7 @@ public class CustomLog extends BlockLog {
     }
 
     @Override
-    public Block setBlockName(String p_149663_1_) {
-        return super.setBlockName(p_149663_1_);
+    public Block setBlockName(String name) {
+        return super.setBlockName(name);
     }
 }

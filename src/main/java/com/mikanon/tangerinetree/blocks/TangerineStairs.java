@@ -9,6 +9,6 @@ public class TangerineStairs extends BlockStairs {
         this.setHardness(3.0F);
         this.setResistance(2.0F);
         this.setStepSound(soundTypeWood);
-        this.setCreativeTab(TangerineTree.tab);
+        this.useNeighborBrightness = true;
     }
 }

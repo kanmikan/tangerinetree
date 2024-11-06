@@ -24,7 +24,6 @@ public class TangerineSlab extends BlockSlab {
         this.setResistance(2.0F);
         this.setStepSound(soundTypeWood);
         this.useNeighborBrightness = true;
-        this.setCreativeTab(TangerineTree.tab);
     }
 
     @SideOnly(Side.CLIENT)

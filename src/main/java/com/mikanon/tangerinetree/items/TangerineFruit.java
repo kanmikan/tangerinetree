@@ -11,7 +11,6 @@ public class TangerineFruit extends ItemFood {
 
     public TangerineFruit(){
         super(3, 0.3F, false);
-        this.setCreativeTab(TangerineTree.tab);
     }
 
     @SideOnly(Side.CLIENT)

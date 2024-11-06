@@ -1,11 +1,12 @@
 package com.mikanon.tangerinetree;
 
-import com.mikanon.tangerinetree.biome.features.generic.CustomLeaf;
-import com.mikanon.tangerinetree.biome.features.generic.CustomLog;
-import com.mikanon.tangerinetree.biome.features.generic.CustomSapling;
+import com.mikanon.tangerinetree.biome.features.generic.TangerineLeaf;
+import com.mikanon.tangerinetree.biome.features.generic.TangerineLog;
+import com.mikanon.tangerinetree.biome.features.generic.TangerineSapling;
 import com.mikanon.tangerinetree.blocks.TangerinePlankBlock;
 import com.mikanon.tangerinetree.blocks.TangerineSlab;
 import com.mikanon.tangerinetree.blocks.TangerineStairs;
+import com.mikanon.tangerinetree.biome.features.generic.TangerineTreeWorldGenerator;
 import com.mikanon.tangerinetree.items.*;
 import com.mikanon.tangerinetree.ui.TangerineTab;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -19,16 +20,16 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 
 @Mod(modid = TangerineTree.MODID, version = TangerineTree.VERSION)
 public class TangerineTree {
 
     public static final String MODID = "tangerinetree";
-    public static final String VERSION = "1.2";
+    public static final String VERSION = "1.2.1";
 
     public static TangerineTab tab;
     public static Block tangerineLog;
@@ -45,14 +46,14 @@ public class TangerineTree {
 
         //Inicializacion
         tab = new TangerineTab();
-        tangerineLog = new CustomLog().setBlockName("log").setCreativeTab(tab);
-        tangerineLeaf = new CustomLeaf().setBlockName("leaf").setCreativeTab(tab);
-        tangerineSapling = new CustomSapling().setBlockName("sapling").setCreativeTab(tab);
-        tangerineFruit = new TangerineFruit().setUnlocalizedName("tangerine_fruit");
-        tangerinePlank = new TangerinePlankBlock(Material.wood).setBlockName("tangerine_plank");
-        tangerineSlab = (BlockSlab) new TangerineSlab(false).setBlockName("tangerine_slab");
+        tangerineLog = new TangerineLog().setBlockName("log").setCreativeTab(tab);
+        tangerineLeaf = new TangerineLeaf().setBlockName("leaf").setCreativeTab(tab);
+        tangerineSapling = new TangerineSapling().setBlockName("sapling").setCreativeTab(tab);
+        tangerineFruit = new TangerineFruit().setUnlocalizedName("tangerine_fruit").setCreativeTab(tab);
+        tangerinePlank = new TangerinePlankBlock(Material.wood).setBlockName("tangerine_plank").setCreativeTab(tab);
+        tangerineSlab = (BlockSlab) new TangerineSlab(false).setBlockName("tangerine_slab").setCreativeTab(tab);
         tangerineDoubleSlab = (BlockSlab) new TangerineSlab(true).setBlockName("tangerine_double_slab");
-        tangerineStairs = new TangerineStairs().setBlockName("tangerine_stairs");
+        tangerineStairs = new TangerineStairs().setBlockName("tangerine_stairs").setCreativeTab(tab);
 
         //Registro
         GameRegistry.registerBlock(tangerineLog, TangerineLogBlock.class, tangerineLog.getUnlocalizedName().substring(5));
@@ -70,6 +71,10 @@ public class TangerineTree {
     public void init(FMLInitializationEvent event){
         GameRegistry.addShapelessRecipe(new ItemStack(tangerinePlank, 4), new ItemStack(tangerineLog, 1));
 
+        //que vanilla acepte la madera para las recetas de madera genericas.
+        OreDictionary.registerOre("plankWood", tangerinePlank);
+        OreDictionary.registerOre("logWood", tangerineLog);
+
         GameRegistry.addRecipe(new ItemStack(tangerineStairs, 4),
                 "X  ",
                 "XX ",
@@ -80,56 +85,8 @@ public class TangerineTree {
                 "XXX",
                 'X', new ItemStack(tangerinePlank));
 
-        GameRegistry.addRecipe(new ItemStack(Blocks.crafting_table, 1),
-                "XX",
-                "XX",
-                'X', new ItemStack(tangerinePlank));
-
-        GameRegistry.addRecipe(new ItemStack(Items.stick, 4),
-                "X",
-                "X",
-                'X', new ItemStack(tangerinePlank));
-
-        GameRegistry.addRecipe(new ItemStack(Blocks.chest, 1),
-                "XXX",
-                "X X",
-                "XXX",
-                'X', new ItemStack(tangerinePlank));
-
-        GameRegistry.addRecipe(new ItemStack(Items.wooden_sword, 1),
-                "X",
-                "X",
-                "S",
-                'X', new ItemStack(tangerinePlank),
-                'S', new ItemStack(Items.stick));
-
-        GameRegistry.addRecipe(new ItemStack(Items.wooden_pickaxe, 1),
-                "XXX",
-                " S ",
-                " S ",
-                'X', new ItemStack(tangerinePlank),
-                'S', new ItemStack(Items.stick));
-
-        GameRegistry.addRecipe(new ItemStack(Items.wooden_axe, 1),
-                "XX",
-                "XS",
-                " S",
-                'X', new ItemStack(tangerinePlank),
-                'S', new ItemStack(Items.stick));
-
-        GameRegistry.addRecipe(new ItemStack(Items.wooden_shovel, 1),
-                "X",
-                "S",
-                "S",
-                'X', new ItemStack(tangerinePlank),
-                'S', new ItemStack(Items.stick));
-
-        GameRegistry.addRecipe(new ItemStack(Items.wooden_hoe, 1),
-                "XX",
-                " S",
-                " S",
-                'X', new ItemStack(tangerinePlank),
-                'S', new ItemStack(Items.stick));
+        //worldgen
+        GameRegistry.registerWorldGenerator(new TangerineTreeWorldGenerator(), -1); //prioridad superior a vanilla?
 
     }
     
